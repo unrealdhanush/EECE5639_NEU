@@ -8,8 +8,8 @@ logger = logging.getLogger(__name__)
 MIN_MATCH_COUNT = 10
 MAX_FEATURES = 500
 
-img1 = cv2.imread('image3.jpeg', 0)  # queryImage
-img2 = cv2.imread('image4.jpeg', 0)  # trainImage
+img1 = cv2.imread('example_1/image1.jpeg', 0)  # queryImage
+img2 = cv2.imread('example_1/image2.jpeg', 0)  # trainImage
 #img2 = img1
 
 sift=cv2.SIFT_create(MAX_FEATURES)
@@ -65,7 +65,7 @@ if len(good) > MIN_MATCH_COUNT:
         pt2 = (int(kp2[m.trainIdx].pt[0] + w1), int(kp2[m.trainIdx].pt[1]))
         color=(rr(255),rr(255),rr(255))
         cv2.line(newimg, pt1, pt2, color)
-
+    plt.title("SIFT Keypoint Matches")
     plt.imshow(newimg)
     plt.show()
 else:
@@ -83,4 +83,5 @@ plt.show()
 stereo = cv2.StereoBM_create(numDisparities=160, blockSize=15)
 disparity = stereo.compute(img1,img2)
 plt.imshow(disparity,'gray')
+plt.title("Disparity Map")
 plt.show()
